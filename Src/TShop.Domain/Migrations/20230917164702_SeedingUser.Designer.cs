@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TShop.Domain.DataAccess;
 
@@ -10,9 +11,11 @@ using TShop.Domain.DataAccess;
 namespace TShop.Domain.Migrations
 {
     [DbContext(typeof(TShopDbContext))]
-    partial class TShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230917164702_SeedingUser")]
+    partial class SeedingUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
