@@ -22,6 +22,17 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    var context = services.GetRequiredService<TShopDbContext>();    
+
+    // Ensure that always create the new database if if is not exists
+    // await context.Database.EnsureCreatedAsync();
+    await context.Database.MigrateAsync();
+}
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
