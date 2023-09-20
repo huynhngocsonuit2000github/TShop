@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TShop.Domain.DataAccess;
+using TShop.Domain.Entities;
 
 namespace TShop.Api.Controllers;
 
@@ -20,5 +21,14 @@ public class UsersController : ControllerBase
     {
         var data = context.Users.ToList();
         return Ok(data);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> Create(User user)
+    {
+        await context.Users.AddAsync(user);
+        await context.SaveChangesAsync();
+
+        return Ok(user);
     }
 }
