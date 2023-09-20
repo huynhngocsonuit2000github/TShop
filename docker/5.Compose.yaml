@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+
+  tshop-app:
+    image: tshop:v5
+    networks:
+      - tshop-network
+    ports:
+      - 6001:80
+    environment:
+      ASPNETCORE_ENVIRONMENT: Docker
+
+  tshop-sql: 
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    networks:
+      - tshop-network
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: Pmsa@123456
+    ports:
+      - 1444:1433
+    volumes:
+      - tshop-sql-volume:/var/opt/mssql
+      
+networks:
+  tshop-network:
+    driver: bridge
+volumes:
+  tshop-sql-volume:
